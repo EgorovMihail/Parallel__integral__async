@@ -8,7 +8,7 @@ namespace integral
 {
     public class IntegralMath : IMath
     {
-        public double Trap(double a, double b, double h, Func<double, double> func)
+    public double Trap(double a, double b, double h, Func<double, double> func)
         {
             if (h < 0.0)
             {

@@ -36,6 +36,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.cancel = new System.Windows.Forms.Button();
             this.step_in = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -67,7 +70,7 @@
             this.label5.BackColor = System.Drawing.Color.White;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(21, 232);
+            this.label5.Location = new System.Drawing.Point(21, 204);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(81, 17);
             this.label5.TabIndex = 9;
@@ -133,6 +136,9 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.progressBar1);
+            this.groupBox1.Controls.Add(this.cancel);
             this.groupBox1.Controls.Add(this.step_in);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label7);
@@ -142,10 +148,39 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox1.Location = new System.Drawing.Point(10, 62);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(335, 135);
+            this.groupBox1.Size = new System.Drawing.Size(335, 245);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "параметры интегрирования";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label6.Location = new System.Drawing.Point(39, 132);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(50, 13);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "Progres";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(39, 148);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(258, 31);
+            this.progressBar1.TabIndex = 8;
+            // 
+            // cancel
+            // 
+            this.cancel.BackColor = System.Drawing.Color.Brown;
+            this.cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cancel.ForeColor = System.Drawing.Color.White;
+            this.cancel.Location = new System.Drawing.Point(89, 185);
+            this.cancel.Name = "cancel";
+            this.cancel.Size = new System.Drawing.Size(130, 38);
+            this.cancel.TabIndex = 7;
+            this.cancel.Text = "Отмена ";
+            this.cancel.UseVisualStyleBackColor = false;
             // 
             // step_in
             // 
@@ -186,9 +221,9 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupBox2.Location = new System.Drawing.Point(9, 203);
+            this.groupBox2.Location = new System.Drawing.Point(9, 313);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(335, 373);
+            this.groupBox2.Size = new System.Drawing.Size(335, 326);
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "результаты вычислений [последовательно]";
@@ -197,7 +232,7 @@
             // 
             this.eTrap.AutoSize = true;
             this.eTrap.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.eTrap.Location = new System.Drawing.Point(21, 311);
+            this.eTrap.Location = new System.Drawing.Point(21, 283);
             this.eTrap.Name = "eTrap";
             this.eTrap.Size = new System.Drawing.Size(35, 22);
             this.eTrap.TabIndex = 11;
@@ -219,7 +254,7 @@
             this.Trap_out.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Trap_out.Font = new System.Drawing.Font("Arial", 28F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Trap_out.ForeColor = System.Drawing.Color.Black;
-            this.Trap_out.Location = new System.Drawing.Point(17, 260);
+            this.Trap_out.Location = new System.Drawing.Point(17, 232);
             this.Trap_out.Name = "Trap_out";
             this.Trap_out.Size = new System.Drawing.Size(73, 44);
             this.Trap_out.TabIndex = 10;
@@ -255,7 +290,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::integral.Properties.Resources.интеграл2;
-            this.pictureBox1.Location = new System.Drawing.Point(41, 39);
+            this.pictureBox1.Location = new System.Drawing.Point(41, 94);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(252, 58);
@@ -272,9 +307,9 @@
             this.groupBox3.Controls.Add(this.label13);
             this.groupBox3.Controls.Add(this.label14);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupBox3.Location = new System.Drawing.Point(350, 203);
+            this.groupBox3.Location = new System.Drawing.Point(350, 313);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(335, 373);
+            this.groupBox3.Size = new System.Drawing.Size(335, 326);
             this.groupBox3.TabIndex = 22;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "результаты вычислений [параллельно]";
@@ -283,7 +318,7 @@
             // 
             this.epTrap.AutoSize = true;
             this.epTrap.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.epTrap.Location = new System.Drawing.Point(21, 311);
+            this.epTrap.Location = new System.Drawing.Point(21, 283);
             this.epTrap.Name = "epTrap";
             this.epTrap.Size = new System.Drawing.Size(35, 22);
             this.epTrap.TabIndex = 11;
@@ -305,7 +340,7 @@
             this.pTrap_out.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.pTrap_out.Font = new System.Drawing.Font("Arial", 28F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.pTrap_out.ForeColor = System.Drawing.Color.Black;
-            this.pTrap_out.Location = new System.Drawing.Point(17, 260);
+            this.pTrap_out.Location = new System.Drawing.Point(17, 232);
             this.pTrap_out.Name = "pTrap_out";
             this.pTrap_out.Size = new System.Drawing.Size(73, 44);
             this.pTrap_out.TabIndex = 10;
@@ -329,7 +364,7 @@
             this.label13.BackColor = System.Drawing.Color.White;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label13.ForeColor = System.Drawing.Color.Black;
-            this.label13.Location = new System.Drawing.Point(21, 232);
+            this.label13.Location = new System.Drawing.Point(21, 204);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(81, 17);
             this.label13.TabIndex = 9;
@@ -355,7 +390,7 @@
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox4.Location = new System.Drawing.Point(350, 62);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(335, 135);
+            this.groupBox4.Size = new System.Drawing.Size(335, 245);
             this.groupBox4.TabIndex = 23;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "расчитываемый интеграл";
@@ -365,15 +400,16 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.BackgroundImage = global::integral.Properties.Resources.котик;
+            this.BackgroundImage = global::integral.Properties.Resources.котик2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(1277, 588);
+            this.ClientSize = new System.Drawing.Size(1277, 643);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.hints);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.groupBox1);
+            this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -421,6 +457,9 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Button cancel;
     }
 }
 

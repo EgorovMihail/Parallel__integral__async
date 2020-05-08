@@ -18,8 +18,14 @@ namespace integral
             InitializeComponent();
         }
 
-        private void Trap()
-        {
+       
+
+    private void Trap()
+    {
+            //Progress<int> progress = new Progress<int>();
+            //progress.ProgressChanged += (sender, e) => { pgb.Value = e; };
+            //bool answerReady = true;
+
             if ((border__a.Text != "") && (border__b.Text != "") && (step_in.Text != ""))
             {
                 IntegralMath p = new IntegralMath();
