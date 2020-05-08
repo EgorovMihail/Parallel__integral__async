@@ -169,6 +169,7 @@
             this.pbg.Name = "pbg";
             this.pbg.Size = new System.Drawing.Size(258, 31);
             this.pbg.TabIndex = 8;
+            this.pbg.Click += new System.EventHandler(this.pbg_Click);
             // 
             // cancel
             // 

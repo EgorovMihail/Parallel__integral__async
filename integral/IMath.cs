@@ -8,7 +8,7 @@ namespace integral
 {
     public interface IMath
     {
-        double Trap(double a, double b, double h, Func<double, double> func);
-        double Sims(double a, double b, double h, Func<double, double> func);
+        double Trap(double a, double b, double h, IProgress<int> progress, Func<double, double> func);
+        double Sims(double a, double b, double h, IProgress<int> progress, Func<double, double> func);
     }
 }

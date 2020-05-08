@@ -10,10 +10,9 @@ namespace integral
     public class IntegralMath : IMath
     {
 
-        //CancellationTokenSource _cts;
-        //Progress<double> progress = new Progress<double>();
+        
 
-        public double Trap(double a, double b, double h, Func<double, double> func, IProgress<int> progress)
+        public double Trap(double a, double b, double h, IProgress<int> progress, Func<double, double> func)
         {
 
 
@@ -44,25 +43,28 @@ namespace integral
             {
                 int n = Convert.ToInt32((b - a) / h);
 
+                progress.Report(1);
                 for (int i = 1; i < n; i++)
                 {
+                    progress.Report(i);
                     sum_x += func(a + i * h);
                 }
+                progress.Report(100);
 
                 sum_x += (func(a) + func(b)) / 2.0;
                 sum_x *= h;
 
-                double step = (a - b) / h;
 
+                //int step = Convert.ToInt32((a - b) / h);
 
-                //progress.Report(step/100);
+                //progress.Report(10*100 / step);
 
             }
 
             return sum_x;
         }
 
-        public double Sims(double A, double B, double h, Func<double, double> func)
+        public double Sims(double A, double B, double h, IProgress<int> progress, Func<double, double> func)
         {
             if (h < 0.0)
             {
@@ -84,7 +86,7 @@ namespace integral
                 throw new ArgumentException();
             }
 
-            //_cts = new CancellationTokenSource();
+            
 
             double x = 0.0;
             double sum = 0.0;
@@ -100,7 +102,7 @@ namespace integral
 
             double res = h / 3.0 * (func(A) + func(B) + sum);
 
-            double step = (A - B) / h;
+            int step = Convert.ToInt32((A - B) / h);
 
             return res;
         }
