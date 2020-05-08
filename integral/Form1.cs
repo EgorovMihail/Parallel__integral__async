@@ -70,6 +70,7 @@ namespace integral
 
             }, TaskScheduler.FromCurrentSynchronizationContext());
 
+
             await Task<double>.Factory.StartNew(() => pTrap(cts3.Token, time3)).ContinueWith(task => {
 
                 if (task.IsFaulted)
@@ -109,9 +110,7 @@ namespace integral
 
         private double Trap(CancellationToken token, Stopwatch time)
         {
-            //Progress<int> progress = new Progress<int>();
-            //progress.ProgressChanged += (sender, e) => { pgb.Value = e; };
-            //bool answerReady = true;
+            Progress<int> progress = new Progress<int>();
 
             IntegralMath p = new IntegralMath();
             double num1, num2, num3, res = 0.0;
@@ -130,7 +129,7 @@ namespace integral
                 {
                     time.Start();
 
-                    res = Math.Round(p.Trap(num1, num2, num3, token, x => 2.0 * x - Math.Log(2.0 * x) + 234.0), 3);
+                    res = Math.Round(p.Trap(num1, num2, num3, token, progress, x => 2.0 * x - Math.Log(2.0 * x) + 234.0), 3);
 
                     time.Stop();
                 }
@@ -141,6 +140,8 @@ namespace integral
 
         private double Sims(CancellationToken token, Stopwatch time)
         {
+            Progress<int> progress = new Progress<int>();
+
             IntegralMath q = new IntegralMath();
             double num1, num2, num3, res = 0.0;
 
@@ -158,7 +159,7 @@ namespace integral
                 {
                     time.Start();
 
-                    res = Math.Round(q.Sims(num1, num2, num3, token, x => 2.0 * x - Math.Log(2.0 * x) + 234.0), 3);
+                    res = Math.Round(q.Sims(num1, num2, num3, token, progress, x => 2.0 * x - Math.Log(2.0 * x) + 234.0), 3);
 
                     time.Stop();
                 }
@@ -169,6 +170,8 @@ namespace integral
 
         private double pTrap(CancellationToken token, Stopwatch time)
         {
+            Progress<int> progress = new Progress<int>();
+
             IntegralMath p = new IntegralMath();
             double num1, num2, num3, res = 0.0;
 
@@ -186,7 +189,7 @@ namespace integral
                 {
                     time.Start();
 
-                    res = Math.Round(p.pTrap(num1, num2, num3, token, x => 2.0 * x - Math.Log(2.0 * x) + 234.0), 3);
+                    res = Math.Round(p.pTrap(num1, num2, num3, token, progress, x => 2.0 * x - Math.Log(2.0 * x) + 234.0), 3);
 
                     time.Stop();
                 }
@@ -197,6 +200,8 @@ namespace integral
 
         private double pSims(CancellationToken token, Stopwatch time)
         {
+            Progress<int> progress = new Progress<int>();
+
             IntegralMath q = new IntegralMath();
             double num1, num2, num3, res = 0.0;
 
@@ -214,7 +219,7 @@ namespace integral
                 {
                     time.Start();
 
-                    res = Math.Round(q.pSims(num1, num2, num3, token, x => 2.0 * x - Math.Log(2.0 * x) + 234.0), 3);
+                    res = Math.Round(q.pSims(num1, num2, num3, token, progress, x => 2.0 * x - Math.Log(2.0 * x) + 234.0), 3);
 
                     time.Stop();
                 }

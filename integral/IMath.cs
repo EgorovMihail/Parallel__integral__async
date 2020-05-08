@@ -9,7 +9,7 @@ namespace integral
 {
     public interface IMath
     {
-        double Trap(double a, double b, double h, CancellationToken token, Func<double, double> func);
-        double Sims(double a, double b, double h, CancellationToken token, Func<double, double> func);
+        double Trap(double a, double b, double h, CancellationToken token, IProgress<int> progress, Func<double, double> func);
+        double Sims(double a, double b, double h, CancellationToken token, IProgress<int> progress, Func<double, double> func);
     }
 }

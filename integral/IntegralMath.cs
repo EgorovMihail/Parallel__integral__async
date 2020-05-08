@@ -9,7 +9,7 @@ namespace integral
 {
     public class IntegralMath : IMath
     {
-        public double Trap(double a, double b, double h, CancellationToken token, Func<double, double> func)
+        public double Trap(double a, double b, double h, CancellationToken token, IProgress<int> progress, Func<double, double> func)
         {
             if (h < 0.0)
             {
@@ -37,6 +37,7 @@ namespace integral
             {
                 int n = Convert.ToInt32((b - a) / h);
 
+                progress.Report(0);
                 for (int i = 1; i < n; i++)
                 {
                     if (token.IsCancellationRequested)
@@ -44,7 +45,10 @@ namespace integral
                         break;
                     }
                     sum_x += func(a + i * h);
+                    progress.Report(i);
+
                 }
+                progress.Report(100);
 
                 sum_x += (func(a) + func(b)) / 2.0;
                 sum_x *= h;
@@ -53,7 +57,7 @@ namespace integral
             return sum_x;
         }
 
-        public double Sims(double A, double B, double h, CancellationToken token, Func<double, double> func)
+        public double Sims(double A, double B, double h, CancellationToken token, IProgress<int> progress, Func<double, double> func)
         {
             if (h < 0.0)
             {
@@ -79,6 +83,8 @@ namespace integral
             double sum = 0.0;
             int m = Convert.ToInt32((B - A) / h);
 
+           
+
             for (int i = 0; i < m; i++)
             {
                 if (token.IsCancellationRequested)
@@ -90,7 +96,9 @@ namespace integral
 
                 if (i % 2 == 0) sum += 2.0 * func(x);
                 else sum += 4.0 * func(x);
+                progress.Report(i);
             }
+            progress.Report(100);
 
             double res = h / 3.0 * (func(A) + func(B) + sum);
 
@@ -98,7 +106,7 @@ namespace integral
         }
 
         //Параллельный метод трапеций
-        public double pTrap(double a, double b, double h, CancellationToken token, Func<double, double> func)
+        public double pTrap(double a, double b, double h, CancellationToken token, IProgress<int> progress, Func<double, double> func)
         {
             if (h < 0.0)
             {
@@ -129,7 +137,7 @@ namespace integral
 
                 Parallel.For(1, n, new ParallelOptions() { CancellationToken = token }, (i, state) =>
                 {
-                    //token.ThrowIfCancellationRequested();
+                    progress.Report(i);
                     if (token.IsCancellationRequested)
                     {
                         state.Break();
@@ -138,6 +146,8 @@ namespace integral
                     buf[i] = func(a + i * h);
                 });
 
+                progress.Report(100);
+
                 sum_x = h * (buf.AsParallel().Sum(X => X) + (func(a) + func(b)) / 2.0);
             }
 
@@ -145,7 +155,7 @@ namespace integral
         }
 
         //паралельный метод Симпсона 
-        public double pSims(double A, double B, double h, CancellationToken token, Func<double, double> func)
+        public double pSims(double A, double B, double h, CancellationToken token, IProgress<int> progress, Func<double, double> func)
         {
             if (h < 0.0)
             {
@@ -178,7 +188,8 @@ namespace integral
 
                 Parallel.For(0, m, new ParallelOptions() { CancellationToken = token }, (i, state) =>
                 {
-                    //token.ThrowIfCancellationRequested();
+                    progress.Report(i);
+
                     if (token.IsCancellationRequested)
                     {
                         state.Break();
@@ -189,6 +200,7 @@ namespace integral
                     if (i % 2 == 0) { buf[i] = 2.0 * func(x[i]); }
                     else { buf[i] = 4.0 * func(x[i]); }
                 });
+                progress.Report(100);
 
                 res = h / 3.0 * (func(A) + func(B) + buf.AsParallel().Sum(X => X));
             }
