@@ -34,54 +34,84 @@ namespace integral
             cts3 = new CancellationTokenSource();
             cts4 = new CancellationTokenSource();
 
-
-            Progress<int> progress = new Progress<int>();
-
             await Task<double>.Factory.StartNew(() => Trap(cts1.Token, time1)).ContinueWith(task => {
 
-                Trap_out.Text = Convert.ToString(task.Result);
-                eTrap.Text = Convert.ToString(time1.Elapsed);
-
-                pbg.Value = 0;
-                progress.ProgressChanged += (sender, e) =>
+                if (task.IsFaulted)
                 {
-                    pbg.Value = e;
-                };
+                    Trap_out.Text = "ошибка";
+                }
+                else if (task.IsCanceled || cts1.Token.IsCancellationRequested)
+                {
+                    Trap_out.Text = "Отменен";
+                }
+                else
+                {
+                    Trap_out.Text = Convert.ToString(task.Result);
+                    eTrap.Text = Convert.ToString(time1.Elapsed);
+                }
 
             }, TaskScheduler.FromCurrentSynchronizationContext());
 
             await Task<double>.Factory.StartNew(() => Sims(cts2.Token, time2)).ContinueWith(task => {
 
-                Sims_out.Text = Convert.ToString(task.Result);
-                eSims.Text = Convert.ToString(time2.Elapsed);
-
-                pbg.Value = 0;
-                progress.ProgressChanged += (sender, e) =>
+                if (task.IsFaulted)
                 {
-                    pbg.Value = e;
-                };
+                    Sims_out.Text = "ошибка";
+                }
+                else if (task.IsCanceled || cts2.Token.IsCancellationRequested)
+                {
+                    Sims_out.Text = "Отменен";
+                }
+                else
+                {
+                    Sims_out.Text = Convert.ToString(task.Result);
+                    eSims.Text = Convert.ToString(time2.Elapsed);
+                }
 
             }, TaskScheduler.FromCurrentSynchronizationContext());
 
             await Task<double>.Factory.StartNew(() => pTrap(cts3.Token, time3)).ContinueWith(task => {
 
-                pTrap_out.Text = Convert.ToString(task.Result);
-                epTrap.Text = Convert.ToString(time3.Elapsed);
+                if (task.IsFaulted)
+                {
+                    pTrap_out.Text = "ошибка";
+                }
+                else if (task.IsCanceled || cts3.Token.IsCancellationRequested)
+                {
+                    pTrap_out.Text = "Отменен";
+                }
+                else
+                {
+                    pTrap_out.Text = Convert.ToString(task.Result);
+                    epTrap.Text = Convert.ToString(time3.Elapsed);
+                }
 
             }, TaskScheduler.FromCurrentSynchronizationContext());
 
             await Task<double>.Factory.StartNew(() => pSims(cts4.Token, time4)).ContinueWith(task => {
 
-                pSims_out.Text = Convert.ToString(task.Result);
-                epSims.Text = Convert.ToString(time4.Elapsed);
+                if (task.IsFaulted)
+                {
+                    pSims_out.Text = "ошибка";
+                }
+                else if (task.IsCanceled || cts4.Token.IsCancellationRequested)
+                {
+                    pSims_out.Text = "Отменен";
+                }
+                else
+                {
+                    pSims_out.Text = Convert.ToString(task.Result);
+                    epSims.Text = Convert.ToString(time4.Elapsed);
+                }
 
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         private double Trap(CancellationToken token, Stopwatch time)
         {
-            Progress<int> progress = new Progress<int>();
-
+            //Progress<int> progress = new Progress<int>();
+            //progress.ProgressChanged += (sender, e) => { pgb.Value = e; };
+            //bool answerReady = true;
 
             IntegralMath p = new IntegralMath();
             double num1, num2, num3, res = 0.0;
@@ -100,7 +130,7 @@ namespace integral
                 {
                     time.Start();
 
-                    res = Math.Round(p.Trap(num1, num2, num3, progress, x => 2.0 * x - Math.Log(2.0 * x) + 234.0), 3);
+                    res = Math.Round(p.Trap(num1, num2, num3, token, x => 2.0 * x - Math.Log(2.0 * x) + 234.0), 3);
 
                     time.Stop();
                 }
@@ -111,8 +141,6 @@ namespace integral
 
         private double Sims(CancellationToken token, Stopwatch time)
         {
-            Progress<int> progress = new Progress<int>();
-
             IntegralMath q = new IntegralMath();
             double num1, num2, num3, res = 0.0;
 
@@ -130,7 +158,7 @@ namespace integral
                 {
                     time.Start();
 
-                    res = Math.Round(q.Sims(num1, num2, num3, progress, x => 2.0 * x - Math.Log(2.0 * x) + 234.0), 3);
+                    res = Math.Round(q.Sims(num1, num2, num3, token, x => 2.0 * x - Math.Log(2.0 * x) + 234.0), 3);
 
                     time.Stop();
                 }
@@ -139,7 +167,6 @@ namespace integral
             return res;
         }
 
-        
         private double pTrap(CancellationToken token, Stopwatch time)
         {
             IntegralMath p = new IntegralMath();
@@ -159,7 +186,7 @@ namespace integral
                 {
                     time.Start();
 
-                    res = Math.Round(p.pTrap(num1, num2, num3, x => 2.0 * x - Math.Log(2.0 * x) + 234.0), 3);
+                    res = Math.Round(p.pTrap(num1, num2, num3, token, x => 2.0 * x - Math.Log(2.0 * x) + 234.0), 3);
 
                     time.Stop();
                 }
@@ -187,7 +214,7 @@ namespace integral
                 {
                     time.Start();
 
-                    res = Math.Round(q.pSims(num1, num2, num3, x => 2.0 * x - Math.Log(2.0 * x) + 234.0), 3);
+                    res = Math.Round(q.pSims(num1, num2, num3, token, x => 2.0 * x - Math.Log(2.0 * x) + 234.0), 3);
 
                     time.Stop();
                 }
@@ -211,15 +238,48 @@ namespace integral
             DoAsync();
         }
 
+        private void cancel_Sims_Click(object sender, EventArgs e)
+        {
+            if (cts2 != null)
+            {
+                cts2.Cancel();
+            }
+        }
+        private void cancel_Trap_Click(object sender, EventArgs e)
+        {
+            if (cts1 != null)
+            {
+                cts1.Cancel();
+            }
+        }
+        private void cancel_pSims_Click(object sender, EventArgs e)
+        {
+            if (cts4 != null)
+            {
+                cts4.Cancel();
+            }
+        }
+        private void cancel_pTrap_Click(object sender, EventArgs e)
+        {
+            if (cts3 != null)
+            {
+                cts3.Cancel();
+            }
+        }
+        private void cancel_Click(object sender, EventArgs e)
+        {
+            if ((cts1 != null) && (cts2 != null) && (cts3 != null) && (cts4 != null))
+            {
+                cts1.Cancel();
+                cts2.Cancel();
+                cts3.Cancel();
+                cts4.Cancel();
+            }
+        }
+
         private void integral__Form_Load(object sender, EventArgs e)
         {
 
         }
-
-        private void pbg_Click(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }

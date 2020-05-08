@@ -37,10 +37,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.pbg = new System.Windows.Forms.ProgressBar();
-            this.cancel = new System.Windows.Forms.Button();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.step_in = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.cancel_pTrap = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.eTrap = new System.Windows.Forms.Label();
@@ -57,6 +57,10 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.cancel_pSims = new System.Windows.Forms.Button();
+            this.cancel_Sims = new System.Windows.Forms.Button();
+            this.cancel_Trap = new System.Windows.Forms.Button();
+            this.cancel = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -137,9 +141,9 @@
             // 
             this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.pbg);
-            this.groupBox1.Controls.Add(this.cancel);
+            this.groupBox1.Controls.Add(this.progressBar1);
             this.groupBox1.Controls.Add(this.step_in);
+            this.groupBox1.Controls.Add(this.cancel);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label2);
@@ -163,25 +167,12 @@
             this.label6.TabIndex = 9;
             this.label6.Text = "Progres";
             // 
-            // pbg
+            // progressBar1
             // 
-            this.pbg.Location = new System.Drawing.Point(39, 148);
-            this.pbg.Name = "pbg";
-            this.pbg.Size = new System.Drawing.Size(258, 31);
-            this.pbg.TabIndex = 8;
-            this.pbg.Click += new System.EventHandler(this.pbg_Click);
-            // 
-            // cancel
-            // 
-            this.cancel.BackColor = System.Drawing.Color.Brown;
-            this.cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cancel.ForeColor = System.Drawing.Color.White;
-            this.cancel.Location = new System.Drawing.Point(89, 185);
-            this.cancel.Name = "cancel";
-            this.cancel.Size = new System.Drawing.Size(130, 38);
-            this.cancel.TabIndex = 7;
-            this.cancel.Text = "Отмена ";
-            this.cancel.UseVisualStyleBackColor = false;
+            this.progressBar1.Location = new System.Drawing.Point(39, 148);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(258, 31);
+            this.progressBar1.TabIndex = 8;
             // 
             // step_in
             // 
@@ -204,6 +195,19 @@
             this.label7.TabIndex = 5;
             this.label7.Text = "Шаг";
             // 
+            // cancel_pTrap
+            // 
+            this.cancel_pTrap.BackColor = System.Drawing.Color.Brown;
+            this.cancel_pTrap.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cancel_pTrap.ForeColor = System.Drawing.Color.White;
+            this.cancel_pTrap.Location = new System.Drawing.Point(108, 194);
+            this.cancel_pTrap.Name = "cancel_pTrap";
+            this.cancel_pTrap.Size = new System.Drawing.Size(65, 27);
+            this.cancel_pTrap.TabIndex = 7;
+            this.cancel_pTrap.Text = "Отмена ";
+            this.cancel_pTrap.UseVisualStyleBackColor = false;
+            this.cancel_pTrap.Click += new System.EventHandler(this.cancel_pTrap_Click);
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -217,6 +221,8 @@
             this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.groupBox2.Controls.Add(this.eTrap);
             this.groupBox2.Controls.Add(this.eSims);
+            this.groupBox2.Controls.Add(this.cancel_Trap);
+            this.groupBox2.Controls.Add(this.cancel_Sims);
             this.groupBox2.Controls.Add(this.Trap_out);
             this.groupBox2.Controls.Add(this.Sims_out);
             this.groupBox2.Controls.Add(this.label5);
@@ -303,6 +309,8 @@
             this.groupBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.groupBox3.Controls.Add(this.epTrap);
             this.groupBox3.Controls.Add(this.epSims);
+            this.groupBox3.Controls.Add(this.cancel_pSims);
+            this.groupBox3.Controls.Add(this.cancel_pTrap);
             this.groupBox3.Controls.Add(this.pTrap_out);
             this.groupBox3.Controls.Add(this.pSims_out);
             this.groupBox3.Controls.Add(this.label13);
@@ -396,6 +404,58 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "расчитываемый интеграл";
             // 
+            // cancel_pSims
+            // 
+            this.cancel_pSims.BackColor = System.Drawing.Color.Brown;
+            this.cancel_pSims.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cancel_pSims.ForeColor = System.Drawing.Color.White;
+            this.cancel_pSims.Location = new System.Drawing.Point(108, 56);
+            this.cancel_pSims.Name = "cancel_pSims";
+            this.cancel_pSims.Size = new System.Drawing.Size(65, 27);
+            this.cancel_pSims.TabIndex = 7;
+            this.cancel_pSims.Text = "Отмена ";
+            this.cancel_pSims.UseVisualStyleBackColor = false;
+            this.cancel_pSims.Click += new System.EventHandler(this.cancel_pSims_Click);
+            // 
+            // cancel_Sims
+            // 
+            this.cancel_Sims.BackColor = System.Drawing.Color.Brown;
+            this.cancel_Sims.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cancel_Sims.ForeColor = System.Drawing.Color.White;
+            this.cancel_Sims.Location = new System.Drawing.Point(109, 56);
+            this.cancel_Sims.Name = "cancel_Sims";
+            this.cancel_Sims.Size = new System.Drawing.Size(65, 27);
+            this.cancel_Sims.TabIndex = 7;
+            this.cancel_Sims.Text = "Отмена ";
+            this.cancel_Sims.UseVisualStyleBackColor = false;
+            this.cancel_Sims.Click += new System.EventHandler(this.cancel_Sims_Click);
+            // 
+            // cancel_Trap
+            // 
+            this.cancel_Trap.BackColor = System.Drawing.Color.Brown;
+            this.cancel_Trap.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cancel_Trap.ForeColor = System.Drawing.Color.White;
+            this.cancel_Trap.Location = new System.Drawing.Point(108, 194);
+            this.cancel_Trap.Name = "cancel_Trap";
+            this.cancel_Trap.Size = new System.Drawing.Size(65, 27);
+            this.cancel_Trap.TabIndex = 7;
+            this.cancel_Trap.Text = "Отмена ";
+            this.cancel_Trap.UseVisualStyleBackColor = false;
+            this.cancel_Trap.Click += new System.EventHandler(this.cancel_Trap_Click);
+            // 
+            // cancel
+            // 
+            this.cancel.BackColor = System.Drawing.Color.Brown;
+            this.cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cancel.ForeColor = System.Drawing.Color.White;
+            this.cancel.Location = new System.Drawing.Point(197, 185);
+            this.cancel.Name = "cancel";
+            this.cancel.Size = new System.Drawing.Size(100, 42);
+            this.cancel.TabIndex = 7;
+            this.cancel.Text = "Отмена ";
+            this.cancel.UseVisualStyleBackColor = false;
+            this.cancel.Click += new System.EventHandler(this.cancel_Click);
+            // 
             // integral__Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -459,8 +519,12 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ProgressBar pbg;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Button cancel_pTrap;
         private System.Windows.Forms.Button cancel;
+        private System.Windows.Forms.Button cancel_Trap;
+        private System.Windows.Forms.Button cancel_Sims;
+        private System.Windows.Forms.Button cancel_pSims;
     }
 }
 
