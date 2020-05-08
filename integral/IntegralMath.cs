@@ -31,13 +31,13 @@ namespace integral
                 throw new ArgumentException();
             }
 
+            int count = 0;
             double sum_x = 0.0;
 
             if (h != 0.0)
             {
                 int n = Convert.ToInt32((b - a) / h);
 
-                progress.Report(0);
                 for (int i = 1; i < n; i++)
                 {
                     if (token.IsCancellationRequested)
@@ -45,10 +45,10 @@ namespace integral
                         break;
                     }
                     sum_x += func(a + i * h);
-                    progress.Report(i);
 
+                    Interlocked.Increment(ref count);
+                    progress.Report(count * 100 / n);
                 }
-                progress.Report(100);
 
                 sum_x += (func(a) + func(b)) / 2.0;
                 sum_x *= h;
@@ -79,11 +79,10 @@ namespace integral
                 throw new ArgumentException();
             }
 
+            int count = 0;
             double x = 0.0;
             double sum = 0.0;
             int m = Convert.ToInt32((B - A) / h);
-
-           
 
             for (int i = 0; i < m; i++)
             {
@@ -96,9 +95,10 @@ namespace integral
 
                 if (i % 2 == 0) sum += 2.0 * func(x);
                 else sum += 4.0 * func(x);
-                progress.Report(i);
+
+                Interlocked.Increment(ref count);
+                progress.Report(count * 100 / m);
             }
-            progress.Report(100);
 
             double res = h / 3.0 * (func(A) + func(B) + sum);
 
@@ -132,21 +132,22 @@ namespace integral
 
             if (h != 0.0)
             {
+                int count = 0;
                 int n = Convert.ToInt32((b - a) / h);
                 double[] buf = new double[n];
 
                 Parallel.For(1, n, new ParallelOptions() { CancellationToken = token }, (i, state) =>
                 {
-                    progress.Report(i);
                     if (token.IsCancellationRequested)
                     {
                         state.Break();
                     }
 
                     buf[i] = func(a + i * h);
-                });
 
-                progress.Report(100);
+                    Interlocked.Increment(ref count);
+                    progress.Report(count * 100 / n);
+                });
 
                 sum_x = h * (buf.AsParallel().Sum(X => X) + (func(a) + func(b)) / 2.0);
             }
@@ -181,6 +182,7 @@ namespace integral
 
             if (h != 0.0)
             {
+                int count = 0;
                 int m = Convert.ToInt32((B - A) / h);
 
                 double[] buf = new double[m];
@@ -188,8 +190,6 @@ namespace integral
 
                 Parallel.For(0, m, new ParallelOptions() { CancellationToken = token }, (i, state) =>
                 {
-                    progress.Report(i);
-
                     if (token.IsCancellationRequested)
                     {
                         state.Break();
@@ -199,8 +199,10 @@ namespace integral
 
                     if (i % 2 == 0) { buf[i] = 2.0 * func(x[i]); }
                     else { buf[i] = 4.0 * func(x[i]); }
+
+                    Interlocked.Increment(ref count);
+                    progress.Report(count * 100 / m);
                 });
-                progress.Report(100);
 
                 res = h / 3.0 * (func(A) + func(B) + buf.AsParallel().Sum(X => X));
             }

@@ -36,8 +36,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.pgb = new System.Windows.Forms.ProgressBar();
+            this.pgb1 = new System.Windows.Forms.ProgressBar();
             this.step_in = new System.Windows.Forms.TextBox();
             this.cancel = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -61,6 +60,9 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.pgb2 = new System.Windows.Forms.ProgressBar();
+            this.pgb3 = new System.Windows.Forms.ProgressBar();
+            this.pgb4 = new System.Windows.Forms.ProgressBar();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -140,8 +142,6 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.pgb);
             this.groupBox1.Controls.Add(this.step_in);
             this.groupBox1.Controls.Add(this.cancel);
             this.groupBox1.Controls.Add(this.label1);
@@ -157,22 +157,13 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "параметры интегрирования";
             // 
-            // label6
+            // pgb1
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(39, 132);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(50, 13);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "Progres";
-            // 
-            // pgb
-            // 
-            this.pgb.Location = new System.Drawing.Point(39, 148);
-            this.pgb.Name = "pgb";
-            this.pgb.Size = new System.Drawing.Size(258, 31);
-            this.pgb.TabIndex = 8;
+            this.pgb1.Location = new System.Drawing.Point(176, 194);
+            this.pgb1.Name = "pgb1";
+            this.pgb1.Size = new System.Drawing.Size(153, 27);
+            this.pgb1.Step = 1;
+            this.pgb1.TabIndex = 8;
             // 
             // step_in
             // 
@@ -189,9 +180,9 @@
             this.cancel.BackColor = System.Drawing.Color.Brown;
             this.cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cancel.ForeColor = System.Drawing.Color.White;
-            this.cancel.Location = new System.Drawing.Point(197, 185);
+            this.cancel.Location = new System.Drawing.Point(6, 137);
             this.cancel.Name = "cancel";
-            this.cancel.Size = new System.Drawing.Size(100, 42);
+            this.cancel.Size = new System.Drawing.Size(322, 91);
             this.cancel.TabIndex = 7;
             this.cancel.Text = "Отмена ";
             this.cancel.UseVisualStyleBackColor = false;
@@ -233,6 +224,8 @@
             // 
             this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.groupBox2.Controls.Add(this.eTrap);
+            this.groupBox2.Controls.Add(this.pgb1);
+            this.groupBox2.Controls.Add(this.pgb2);
             this.groupBox2.Controls.Add(this.eSims);
             this.groupBox2.Controls.Add(this.cancel_Trap);
             this.groupBox2.Controls.Add(this.cancel_Sims);
@@ -347,6 +340,8 @@
             // 
             this.groupBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.groupBox3.Controls.Add(this.epTrap);
+            this.groupBox3.Controls.Add(this.pgb4);
+            this.groupBox3.Controls.Add(this.pgb3);
             this.groupBox3.Controls.Add(this.epSims);
             this.groupBox3.Controls.Add(this.cancel_pSims);
             this.groupBox3.Controls.Add(this.cancel_pTrap);
@@ -456,6 +451,30 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "расчитываемый интеграл";
             // 
+            // pgb2
+            // 
+            this.pgb2.Location = new System.Drawing.Point(176, 56);
+            this.pgb2.Name = "pgb2";
+            this.pgb2.Size = new System.Drawing.Size(153, 27);
+            this.pgb2.Step = 1;
+            this.pgb2.TabIndex = 8;
+            // 
+            // pgb3
+            // 
+            this.pgb3.Location = new System.Drawing.Point(179, 194);
+            this.pgb3.Name = "pgb3";
+            this.pgb3.Size = new System.Drawing.Size(150, 27);
+            this.pgb3.Step = 1;
+            this.pgb3.TabIndex = 8;
+            // 
+            // pgb4
+            // 
+            this.pgb4.Location = new System.Drawing.Point(179, 56);
+            this.pgb4.Name = "pgb4";
+            this.pgb4.Size = new System.Drawing.Size(150, 27);
+            this.pgb4.Step = 1;
+            this.pgb4.TabIndex = 8;
+            // 
             // integral__Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -518,13 +537,15 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ProgressBar pgb;
+        private System.Windows.Forms.ProgressBar pgb1;
         private System.Windows.Forms.Button cancel_pTrap;
         private System.Windows.Forms.Button cancel;
         private System.Windows.Forms.Button cancel_Trap;
         private System.Windows.Forms.Button cancel_Sims;
         private System.Windows.Forms.Button cancel_pSims;
+        private System.Windows.Forms.ProgressBar pgb2;
+        private System.Windows.Forms.ProgressBar pgb4;
+        private System.Windows.Forms.ProgressBar pgb3;
     }
 }
 

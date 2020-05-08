@@ -29,12 +29,23 @@ namespace integral
             time2 = new Stopwatch();
             time3 = new Stopwatch();
             time4 = new Stopwatch();
+
             cts1 = new CancellationTokenSource();
             cts2 = new CancellationTokenSource();
             cts3 = new CancellationTokenSource();
             cts4 = new CancellationTokenSource();
 
-            await Task<double>.Factory.StartNew(() => Trap(cts1.Token, time1)).ContinueWith(task => {
+            Progress<int> progress1 = new Progress<int>();
+            Progress<int> progress2 = new Progress<int>();
+            Progress<int> progress3 = new Progress<int>();
+            Progress<int> progress4 = new Progress<int>();
+
+            progress1.ProgressChanged += (sender, e) => { pgb1.Value = e; };
+            progress2.ProgressChanged += (sender, e) => { pgb2.Value = e; };
+            progress3.ProgressChanged += (sender, e) => { pgb3.Value = e; };
+            progress4.ProgressChanged += (sender, e) => { pgb4.Value = e; };
+
+            await Trap(cts1.Token, progress1, time1).ContinueWith(task => {
 
                 if (task.IsFaulted)
                 {
@@ -52,7 +63,7 @@ namespace integral
 
             }, TaskScheduler.FromCurrentSynchronizationContext());
 
-            await Task<double>.Factory.StartNew(() => Sims(cts2.Token, time2)).ContinueWith(task => {
+            await Sims(cts2.Token, progress2, time2).ContinueWith(task => {
 
                 if (task.IsFaulted)
                 {
@@ -70,8 +81,7 @@ namespace integral
 
             }, TaskScheduler.FromCurrentSynchronizationContext());
 
-
-            await Task<double>.Factory.StartNew(() => pTrap(cts3.Token, time3)).ContinueWith(task => {
+            await pTrap(cts3.Token, progress3, time3).ContinueWith(task => {
 
                 if (task.IsFaulted)
                 {
@@ -89,7 +99,7 @@ namespace integral
 
             }, TaskScheduler.FromCurrentSynchronizationContext());
 
-            await Task<double>.Factory.StartNew(() => pSims(cts4.Token, time4)).ContinueWith(task => {
+            await pSims(cts4.Token, progress4, time4).ContinueWith(task => {
 
                 if (task.IsFaulted)
                 {
@@ -108,124 +118,129 @@ namespace integral
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
-        private double Trap(CancellationToken token, Stopwatch time)
+        private Task<double> Trap(CancellationToken token, IProgress<int> progress, Stopwatch time)
         {
-            Progress<int> progress = new Progress<int>();
-
             IntegralMath p = new IntegralMath();
             double num1, num2, num3, res = 0.0;
 
-            if ((border__a.Text != "") && (border__b.Text != "") && (step_in.Text != ""))
+            return Task<double>.Factory.StartNew(() =>
             {
-                string a = border__a.Text;
-                string b = border__b.Text;
-                string h = step_in.Text;
-
-                bool AisNum = double.TryParse(a, out num1);
-                bool BisNum = double.TryParse(b, out num2);
-                bool HisNum = double.TryParse(h, out num3);
-
-                if ((AisNum) && (BisNum) && (HisNum) && (num1 <= num2) && (num3 >= 0.0) && (num1 > 0.0))
+                if ((border__a.Text != "") && (border__b.Text != "") && (step_in.Text != ""))
                 {
-                    time.Start();
+                    string a = border__a.Text;
+                    string b = border__b.Text;
+                    string h = step_in.Text;
 
-                    res = Math.Round(p.Trap(num1, num2, num3, token, progress, x => 2.0 * x - Math.Log(2.0 * x) + 234.0), 3);
+                    bool AisNum = double.TryParse(a, out num1);
+                    bool BisNum = double.TryParse(b, out num2);
+                    bool HisNum = double.TryParse(h, out num3);
 
-                    time.Stop();
+                    if ((AisNum) && (BisNum) && (HisNum) && (num1 <= num2) && (num3 >= 0.0) && (num1 > 0.0))
+                    {
+                        time.Start();
+
+                        res = Math.Round(p.Trap(num1, num2, num3, token, progress, x => 2.0 * x - Math.Log(2.0 * x) + 234.0), 3);
+
+                        time.Stop();
+                    }
                 }
-            }
 
-            return res;
+                return res;
+            }, token);
         }
 
-        private double Sims(CancellationToken token, Stopwatch time)
+        private Task<double> Sims(CancellationToken token, IProgress<int> progress, Stopwatch time)
         {
-            Progress<int> progress = new Progress<int>();
-
             IntegralMath q = new IntegralMath();
             double num1, num2, num3, res = 0.0;
 
-            if ((border__a.Text != "") && (border__b.Text != "") && (step_in.Text != ""))
+            return Task<double>.Factory.StartNew(() =>
             {
-                string a = border__a.Text;
-                string b = border__b.Text;
-                string h = step_in.Text;
 
-                bool AisNum = double.TryParse(a, out num1);
-                bool BisNum = double.TryParse(b, out num2);
-                bool MisNum = double.TryParse(h, out num3);
-
-                if ((AisNum) && (BisNum) && (MisNum) && (num1 <= num2) && (num3 > 0) && (num1 > 0.0))
+                if ((border__a.Text != "") && (border__b.Text != "") && (step_in.Text != ""))
                 {
-                    time.Start();
+                    string a = border__a.Text;
+                    string b = border__b.Text;
+                    string h = step_in.Text;
 
-                    res = Math.Round(q.Sims(num1, num2, num3, token, progress, x => 2.0 * x - Math.Log(2.0 * x) + 234.0), 3);
+                    bool AisNum = double.TryParse(a, out num1);
+                    bool BisNum = double.TryParse(b, out num2);
+                    bool MisNum = double.TryParse(h, out num3);
 
-                    time.Stop();
+                    if ((AisNum) && (BisNum) && (MisNum) && (num1 <= num2) && (num3 > 0) && (num1 > 0.0))
+                    {
+                        time.Start();
+
+                        res = Math.Round(q.Sims(num1, num2, num3, token, progress, x => 2.0 * x - Math.Log(2.0 * x) + 234.0), 3);
+
+                        time.Stop();
+                    }
                 }
-            }
 
-            return res;
+                return res;
+            }, token);
         }
 
-        private double pTrap(CancellationToken token, Stopwatch time)
+        private Task<double> pTrap(CancellationToken token, IProgress<int> progress, Stopwatch time)
         {
-            Progress<int> progress = new Progress<int>();
-
             IntegralMath p = new IntegralMath();
             double num1, num2, num3, res = 0.0;
 
-            if ((border__a.Text != "") && (border__b.Text != "") && (step_in.Text != ""))
+            return Task<double>.Factory.StartNew(() =>
             {
-                string a = border__a.Text;
-                string b = border__b.Text;
-                string h = step_in.Text;
-
-                bool AisNum = double.TryParse(a, out num1);
-                bool BisNum = double.TryParse(b, out num2);
-                bool HisNum = double.TryParse(h, out num3);
-
-                if ((AisNum) && (BisNum) && (HisNum) && (num1 <= num2) && (num3 >= 0.0) && (num1 > 0.0))
+                if ((border__a.Text != "") && (border__b.Text != "") && (step_in.Text != ""))
                 {
-                    time.Start();
+                    string a = border__a.Text;
+                    string b = border__b.Text;
+                    string h = step_in.Text;
 
-                    res = Math.Round(p.pTrap(num1, num2, num3, token, progress, x => 2.0 * x - Math.Log(2.0 * x) + 234.0), 3);
+                    bool AisNum = double.TryParse(a, out num1);
+                    bool BisNum = double.TryParse(b, out num2);
+                    bool HisNum = double.TryParse(h, out num3);
 
-                    time.Stop();
+                    if ((AisNum) && (BisNum) && (HisNum) && (num1 <= num2) && (num3 >= 0.0) && (num1 > 0.0))
+                    {
+                        time.Start();
+
+                        res = Math.Round(p.pTrap(num1, num2, num3, token, progress, x => 2.0 * x - Math.Log(2.0 * x) + 234.0), 3);
+
+                        time.Stop();
+                    }
                 }
-            }
 
-            return res;
+                return res;
+            }, token);
         }
 
-        private double pSims(CancellationToken token, Stopwatch time)
+        private Task<double> pSims(CancellationToken token, IProgress<int> progress, Stopwatch time)
         {
-            Progress<int> progress = new Progress<int>();
-
             IntegralMath q = new IntegralMath();
             double num1, num2, num3, res = 0.0;
 
-            if ((border__a.Text != "") && (border__b.Text != "") && (step_in.Text != ""))
-            {
-                string a = border__a.Text;
-                string b = border__b.Text;
-                string h = step_in.Text;
+            return Task<double>.Factory.StartNew(() => {
 
-                bool AisNum = double.TryParse(a, out num1);
-                bool BisNum = double.TryParse(b, out num2);
-                bool MisNum = double.TryParse(h, out num3);
-
-                if ((AisNum) && (BisNum) && (MisNum) && (num1 <= num2) && (num3 > 0) && (num1 > 0.0))
+                if ((border__a.Text != "") && (border__b.Text != "") && (step_in.Text != ""))
                 {
-                    time.Start();
+                    string a = border__a.Text;
+                    string b = border__b.Text;
+                    string h = step_in.Text;
 
-                    res = Math.Round(q.pSims(num1, num2, num3, token, progress, x => 2.0 * x - Math.Log(2.0 * x) + 234.0), 3);
+                    bool AisNum = double.TryParse(a, out num1);
+                    bool BisNum = double.TryParse(b, out num2);
+                    bool MisNum = double.TryParse(h, out num3);
 
-                    time.Stop();
+                    if ((AisNum) && (BisNum) && (MisNum) && (num1 <= num2) && (num3 > 0) && (num1 > 0.0))
+                    {
+                        time.Start();
+
+                        res = Math.Round(q.pSims(num1, num2, num3, token, progress, x => 2.0 * x - Math.Log(2.0 * x) + 234.0), 3);
+
+                        time.Stop();
+                    }
                 }
-            }
 
-            return res;
+                return res;
+            });
         }
 
         private void border__b_TextChanged(object sender, EventArgs e)
