@@ -18,13 +18,13 @@ namespace integral
             InitializeComponent();
         }
 
-       
 
     private void Trap()
     {
-            //Progress<int> progress = new Progress<int>();
-            //progress.ProgressChanged += (sender, e) => { pgb.Value = e; };
-            //bool answerReady = true;
+            pbg.Value = 0;
+
+            Progress<double> progress = new Progress<double>();
+           
 
             if ((border__a.Text != "") && (border__b.Text != "") && (step_in.Text != ""))
             {
@@ -63,7 +63,7 @@ namespace integral
         }
 
         private void Sims()
-        {       
+        {
             if ((border__a.Text != "") && (border__b.Text != "") && (step_in.Text != ""))
             {
                 IntegralMath q = new IntegralMath();

@@ -37,7 +37,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.pbg = new System.Windows.Forms.ProgressBar();
             this.cancel = new System.Windows.Forms.Button();
             this.step_in = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -137,7 +137,7 @@
             // 
             this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.progressBar1);
+            this.groupBox1.Controls.Add(this.pbg);
             this.groupBox1.Controls.Add(this.cancel);
             this.groupBox1.Controls.Add(this.step_in);
             this.groupBox1.Controls.Add(this.label1);
@@ -163,12 +163,12 @@
             this.label6.TabIndex = 9;
             this.label6.Text = "Progres";
             // 
-            // progressBar1
+            // pbg
             // 
-            this.progressBar1.Location = new System.Drawing.Point(39, 148);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(258, 31);
-            this.progressBar1.TabIndex = 8;
+            this.pbg.Location = new System.Drawing.Point(39, 148);
+            this.pbg.Name = "pbg";
+            this.pbg.Size = new System.Drawing.Size(258, 31);
+            this.pbg.TabIndex = 8;
             // 
             // cancel
             // 
@@ -458,7 +458,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ProgressBar pbg;
         private System.Windows.Forms.Button cancel;
     }
 }
