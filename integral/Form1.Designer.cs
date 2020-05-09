@@ -36,14 +36,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.pgb1 = new System.Windows.Forms.ProgressBar();
             this.step_in = new System.Windows.Forms.TextBox();
             this.cancel = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
+            this.pgb1 = new System.Windows.Forms.ProgressBar();
             this.cancel_pTrap = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.eTrap = new System.Windows.Forms.Label();
+            this.pgb2 = new System.Windows.Forms.ProgressBar();
             this.eSims = new System.Windows.Forms.Label();
             this.cancel_Trap = new System.Windows.Forms.Button();
             this.cancel_Sims = new System.Windows.Forms.Button();
@@ -53,6 +54,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.epTrap = new System.Windows.Forms.Label();
+            this.pgb4 = new System.Windows.Forms.ProgressBar();
+            this.pgb3 = new System.Windows.Forms.ProgressBar();
             this.epSims = new System.Windows.Forms.Label();
             this.cancel_pSims = new System.Windows.Forms.Button();
             this.pTrap_out = new System.Windows.Forms.Label();
@@ -60,9 +63,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.pgb2 = new System.Windows.Forms.ProgressBar();
-            this.pgb3 = new System.Windows.Forms.ProgressBar();
-            this.pgb4 = new System.Windows.Forms.ProgressBar();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -157,14 +157,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "параметры интегрирования";
             // 
-            // pgb1
-            // 
-            this.pgb1.Location = new System.Drawing.Point(176, 194);
-            this.pgb1.Name = "pgb1";
-            this.pgb1.Size = new System.Drawing.Size(153, 27);
-            this.pgb1.Step = 1;
-            this.pgb1.TabIndex = 8;
-            // 
             // step_in
             // 
             this.step_in.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -198,6 +190,14 @@
             this.label7.Size = new System.Drawing.Size(41, 20);
             this.label7.TabIndex = 5;
             this.label7.Text = "Шаг";
+            // 
+            // pgb1
+            // 
+            this.pgb1.Location = new System.Drawing.Point(176, 194);
+            this.pgb1.Name = "pgb1";
+            this.pgb1.Size = new System.Drawing.Size(153, 27);
+            this.pgb1.Step = 1;
+            this.pgb1.TabIndex = 8;
             // 
             // cancel_pTrap
             // 
@@ -250,6 +250,14 @@
             this.eTrap.Size = new System.Drawing.Size(35, 22);
             this.eTrap.TabIndex = 11;
             this.eTrap.Text = "0.0";
+            // 
+            // pgb2
+            // 
+            this.pgb2.Location = new System.Drawing.Point(176, 56);
+            this.pgb2.Name = "pgb2";
+            this.pgb2.Size = new System.Drawing.Size(153, 27);
+            this.pgb2.Step = 1;
+            this.pgb2.TabIndex = 8;
             // 
             // eSims
             // 
@@ -367,6 +375,23 @@
             this.epTrap.TabIndex = 11;
             this.epTrap.Text = "0.0";
             // 
+            // pgb4
+            // 
+            this.pgb4.Location = new System.Drawing.Point(179, 56);
+            this.pgb4.Name = "pgb4";
+            this.pgb4.Size = new System.Drawing.Size(150, 27);
+            this.pgb4.Step = 1;
+            this.pgb4.TabIndex = 8;
+            // 
+            // pgb3
+            // 
+            this.pgb3.Location = new System.Drawing.Point(179, 194);
+            this.pgb3.Name = "pgb3";
+            this.pgb3.Size = new System.Drawing.Size(150, 27);
+            this.pgb3.Step = 1;
+            this.pgb3.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.pgb3.TabIndex = 8;
+            // 
             // epSims
             // 
             this.epSims.AutoSize = true;
@@ -450,30 +475,6 @@
             this.groupBox4.TabIndex = 23;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "расчитываемый интеграл";
-            // 
-            // pgb2
-            // 
-            this.pgb2.Location = new System.Drawing.Point(176, 56);
-            this.pgb2.Name = "pgb2";
-            this.pgb2.Size = new System.Drawing.Size(153, 27);
-            this.pgb2.Step = 1;
-            this.pgb2.TabIndex = 8;
-            // 
-            // pgb3
-            // 
-            this.pgb3.Location = new System.Drawing.Point(179, 194);
-            this.pgb3.Name = "pgb3";
-            this.pgb3.Size = new System.Drawing.Size(150, 27);
-            this.pgb3.Step = 1;
-            this.pgb3.TabIndex = 8;
-            // 
-            // pgb4
-            // 
-            this.pgb4.Location = new System.Drawing.Point(179, 56);
-            this.pgb4.Name = "pgb4";
-            this.pgb4.Size = new System.Drawing.Size(150, 27);
-            this.pgb4.Step = 1;
-            this.pgb4.TabIndex = 8;
             // 
             // integral__Form
             // 

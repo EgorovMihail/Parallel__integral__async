@@ -31,7 +31,6 @@ namespace integral
                 throw new ArgumentException();
             }
 
-            int count = 0;
             double sum_x = 0.0;
 
             if (h != 0.0)
@@ -44,15 +43,18 @@ namespace integral
                     {
                         break;
                     }
+
                     sum_x += func(a + i * h);
 
-                    Interlocked.Increment(ref count);
-                    progress.Report(count * 100 / n);
+                    if (i % 1000 == 0)
+                        progress.Report(i * 100 / n);
                 }
 
                 sum_x += (func(a) + func(b)) / 2.0;
                 sum_x *= h;
             }
+
+            //progress.Report(0);
 
             return sum_x;
         }
@@ -79,7 +81,6 @@ namespace integral
                 throw new ArgumentException();
             }
 
-            int count = 0;
             double x = 0.0;
             double sum = 0.0;
             int m = Convert.ToInt32((B - A) / h);
@@ -96,11 +97,13 @@ namespace integral
                 if (i % 2 == 0) sum += 2.0 * func(x);
                 else sum += 4.0 * func(x);
 
-                Interlocked.Increment(ref count);
-                progress.Report(count * 100 / m);
+                if (i % 1000 == 0)
+                    progress.Report(i * 100 / m);
             }
 
             double res = h / 3.0 * (func(A) + func(B) + sum);
+
+            //progress.Report(0);
 
             return res;
         }
@@ -146,11 +149,14 @@ namespace integral
                     buf[i] = func(a + i * h);
 
                     Interlocked.Increment(ref count);
-                    progress.Report(count * 100 / n);
+                    if (count % 1000 == 0)
+                        progress.Report(count * 100 / n);
                 });
 
                 sum_x = h * (buf.AsParallel().Sum(X => X) + (func(a) + func(b)) / 2.0);
             }
+
+            //progress.Report(0);
 
             return sum_x;
         }
@@ -201,11 +207,14 @@ namespace integral
                     else { buf[i] = 4.0 * func(x[i]); }
 
                     Interlocked.Increment(ref count);
-                    progress.Report(count * 100 / m);
+                    if (count % 1000 == 0)
+                        progress.Report(count * 100 / m);
                 });
 
                 res = h / 3.0 * (func(A) + func(B) + buf.AsParallel().Sum(X => X));
             }
+
+            //progress.Report(0);
 
             return res;
         }
