@@ -45,80 +45,63 @@ namespace integral
             progress3.ProgressChanged += (sender, e) => { pgb3.Value = e; };
             progress4.ProgressChanged += (sender, e) => { pgb4.Value = e; };
 
-            await Task<double>.Factory.StartNew(() => Trap(cts1.Token, progress1, time1)).ContinueWith(task =>
+            var res = 0.0;
+
+            try
             {
-
-                if (task.IsFaulted)
-                {
-                    Trap_out.Text = "Ошибка";
-                }
-                else if (task.IsCanceled || cts1.Token.IsCancellationRequested)
-                {
-                    Trap_out.Text = "Отмена";
-                }
-                else
-                {
-                    Trap_out.Text = Convert.ToString(task.Result);
-                    eTrap.Text = Convert.ToString(time1.Elapsed);
-                }
-            }, TaskScheduler.FromCurrentSynchronizationContext());
-
-            await Task<double>.Factory.StartNew(() => Sims(cts2.Token, progress2, time2)).ContinueWith(task =>
+                res = await Task<double>.Factory.StartNew(() => Trap(cts1.Token, progress1, time1));
+            }
+            catch (OperationCanceledException)
             {
-
-                if (task.IsFaulted)
-                {
-                    Sims_out.Text = "Ошибка";
-                }
-                else if (task.IsCanceled || cts2.Token.IsCancellationRequested)
-                {
-                    Sims_out.Text = "Отмена";
-                }
-                else
-                {
-                    Sims_out.Text = Convert.ToString(task.Result);
-                    eSims.Text = Convert.ToString(time2.Elapsed);
-                }
-
-            }, TaskScheduler.FromCurrentSynchronizationContext());
-
-            await Task<double>.Factory.StartNew(() => pTrap(cts3.Token, progress3, time3)).ContinueWith(task =>
+                Trap_out.Text = "Отмена";
+            }
+            finally
             {
+                Trap_out.Text = Convert.ToString(res);
+                eTrap.Text = Convert.ToString(time1.Elapsed);
+            }
 
-                if (task.IsFaulted)
-                {
-                    pTrap_out.Text = "Ошибка";
-                }
-                else if (task.IsCanceled || cts3.Token.IsCancellationRequested)
-                {
-                    pTrap_out.Text = "Отмена";
-                }
-                else
-                {
-                    pTrap_out.Text = Convert.ToString(task.Result);
-                    epTrap.Text = Convert.ToString(time3.Elapsed);
-                }
-
-            }, TaskScheduler.FromCurrentSynchronizationContext());
-
-            await Task<double>.Factory.StartNew(() => pSims(cts4.Token, progress4, time4)).ContinueWith(task =>
+            try
             {
+                res = await Task<double>.Factory.StartNew(() => Trap(cts2.Token, progress2, time2));
+            }
+            catch (OperationCanceledException)
+            {
+                Sims_out.Text = "Отмена";
+            }
+            finally
+            {
+                Sims_out.Text = Convert.ToString(res);
+                eSims.Text = Convert.ToString(time2.Elapsed);
+            }
 
-                if (task.IsFaulted)
-                {
-                    pSims_out.Text = "Ошибка";
-                }
-                else if (task.IsCanceled || cts4.Token.IsCancellationRequested)
-                {
-                    pSims_out.Text = "Отмена";
-                }
-                else
-                {
-                    pSims_out.Text = Convert.ToString(task.Result);
-                    epSims.Text = Convert.ToString(time4.Elapsed);
-                }
+            try
+            {
+                res = await Task<double>.Factory.StartNew(() => Trap(cts3.Token, progress3, time3));
+            }
+            catch (OperationCanceledException)
+            {
+                pTrap_out.Text = "Отмена";
+            }
+            finally
+            {
+                pTrap_out.Text = Convert.ToString(res);
+                epTrap.Text = Convert.ToString(time3.Elapsed);
+            }
 
-            }, TaskScheduler.FromCurrentSynchronizationContext());
+            try
+            {
+                res = await Task<double>.Factory.StartNew(() => Trap(cts4.Token, progress4, time4));
+            }
+            catch (OperationCanceledException)
+            {
+                pSims_out.Text = "Отмена";
+            }
+            finally
+            {
+                pSims_out.Text = Convert.ToString(res);
+                epSims.Text = Convert.ToString(time4.Elapsed);
+            }
         }
 
         private double Trap(CancellationToken token, IProgress<int> progress, Stopwatch time)

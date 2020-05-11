@@ -31,6 +31,7 @@ namespace integral
                 throw new ArgumentException();
             }
 
+            int count = 0;
             double sum_x = 0.0;
 
             if (h != 0.0)
@@ -46,8 +47,9 @@ namespace integral
 
                     sum_x += func(a + i * h);
 
-                    if (i % 1000 == 0)
-                        progress.Report(i * 100 / n);
+                    Interlocked.Increment(ref count);
+                    if (count % 2000 == 0)
+                        progress.Report(count * 100 / n);
                 }
 
                 sum_x += (func(a) + func(b)) / 2.0;
@@ -81,6 +83,7 @@ namespace integral
                 throw new ArgumentException();
             }
 
+            int count = 0;
             double x = 0.0;
             double sum = 0.0;
             int m = Convert.ToInt32((B - A) / h);
@@ -97,8 +100,9 @@ namespace integral
                 if (i % 2 == 0) sum += 2.0 * func(x);
                 else sum += 4.0 * func(x);
 
-                if (i % 1000 == 0)
-                    progress.Report(i * 100 / m);
+                Interlocked.Increment(ref count);
+                if (count % 2000 == 0)
+                    progress.Report(count * 100 / m);
             }
 
             double res = h / 3.0 * (func(A) + func(B) + sum);
@@ -149,7 +153,7 @@ namespace integral
                     buf[i] = func(a + i * h);
 
                     Interlocked.Increment(ref count);
-                    if (count % 1000 == 0)
+                    if (count % 2000 == 0)
                         progress.Report(count * 100 / n);
                 });
 
@@ -207,7 +211,7 @@ namespace integral
                     else { buf[i] = 4.0 * func(x[i]); }
 
                     Interlocked.Increment(ref count);
-                    if (count % 1000 == 0)
+                    if (count % 2000 == 0)
                         progress.Report(count * 100 / m);
                 });
 
